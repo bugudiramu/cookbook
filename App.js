@@ -1,21 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import LoggedInRoutes from './src/routes/LoggedInRoutes';
+import LoggedOutRoutes from './src/routes/LoggedOutRoutes';
+
+import { firebase } from './src/firebase/Config';
+import CustomLoader from './src/components/CustomLoader';
+
+const App = (props) => {
+  const Stack = createStackNavigator();
+  const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('USER ID', user.uid);
+        setAuthenticated(true);
+        setLoading(false);
+      } else {
+        console.log('User not yet found');
+        setAuthenticated(false);
+      }
+    });
+  }, []);
+  if (loading) {
+    return <CustomLoader />;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {/* props.userToken !== null */}
+        {!authenticated ? (
+          <Stack.Screen name='UnAuth' component={LoggedInRoutes} />
+        ) : (
+          <Stack.Screen name='Auth' component={LoggedOutRoutes} />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
