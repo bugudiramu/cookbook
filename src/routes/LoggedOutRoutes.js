@@ -21,6 +21,20 @@ const LoggedOutRoutes = () => {
     >
       <Stack.Screen
         options={{
+          headerTitle: 'Log In',
+        }}
+        name='login'
+        component={Login}
+      />
+      <Stack.Screen
+        options={{
+          headerTitle: 'Sign Up',
+        }}
+        name='signup'
+        component={Signup}
+      />
+      <Stack.Screen
+        options={{
           headerTitle: 'Select Cuisine',
         }}
         name='SelectCuisineScreen'
@@ -39,20 +53,6 @@ const LoggedOutRoutes = () => {
         })}
         name='DishDetailScreen'
         component={DishDetailScreen}
-      />
-      <Stack.Screen
-        options={{
-          headerTitle: 'Log In',
-        }}
-        name='login'
-        component={Login}
-      />
-      <Stack.Screen
-        options={{
-          headerTitle: 'Sign Up',
-        }}
-        name='signup'
-        component={Signup}
       />
     </Stack.Navigator>
   );

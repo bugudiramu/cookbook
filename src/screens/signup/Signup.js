@@ -58,6 +58,14 @@ const Signup = (props) => {
       <TouchableOpacity onPress={() => props.navigation.navigate('login')}>
         <Text>Already have an account? Login</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          paddingVertical: 10,
+        }}
+        onPress={() => props.navigation.navigate('SelectCuisineScreen')}
+      >
+        <Text>Skip Log In</Text>
+      </TouchableOpacity>
       {message ? <Text style={styles.error}>{message}</Text> : null}
     </View>
   );

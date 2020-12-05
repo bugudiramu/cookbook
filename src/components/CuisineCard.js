@@ -8,11 +8,13 @@ const CuisineCard = ({ name }) => {
   return (
     <TouchableOpacity
       style={styles.cuisineCardContainer}
-      onPress={() =>
-        navigation.navigate('DishesScreen', {
-          headerTitle: name,
-          cuisineName: name,
-        })
+      onPress={
+        () =>
+          navigation.navigate('DishesScreen', {
+            headerTitle: name,
+            cuisineName: name,
+          })
+        // navigation.navigate('AddDish')
       }
     >
       <Text style={styles.cuisineName}>{name}</Text>

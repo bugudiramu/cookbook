@@ -1,10 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import SelectCuisineScreen from '../cuisine/SelectCuisineScreen';
+import AddDish from '../dishes/AddDish';
 
 const HomeScreen = () => {
   return (
     <View>
-      <Text>HomeScreen</Text>
+      <SelectCuisineScreen />
     </View>
   );
 };

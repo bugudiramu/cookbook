@@ -9,6 +9,7 @@ import { firebase } from './src/firebase/Config';
 import CustomLoader from './src/components/CustomLoader';
 
 const App = (props) => {
+  console.ignoredYellowBox = ['Setting a timer'];
   const Stack = createStackNavigator();
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ const App = (props) => {
       } else {
         console.log('User not yet found');
         setAuthenticated(false);
+        setLoading(false);
       }
     });
   }, []);
@@ -32,7 +34,7 @@ const App = (props) => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* props.userToken !== null */}
-        {!authenticated ? (
+        {authenticated ? (
           <Stack.Screen name='UnAuth' component={LoggedInRoutes} />
         ) : (
           <Stack.Screen name='Auth' component={LoggedOutRoutes} />
